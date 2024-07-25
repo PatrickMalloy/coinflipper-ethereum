@@ -1,0 +1,12 @@
+#waitModal {
+}
+
+#wait-spinner-box {
+  border: 1px solid green;
+  /*display: none;*/
+}
+
+#wait-spinner {
+  width: 7rem;
+  height: 7rem;
+}

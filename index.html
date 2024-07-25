@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coin Flipper</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+    <!--<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>-->
+		<script type="text/javascript" src="https://cdn.ethers.io/lib/ethers-5.3.umd.min.js"></script>
+    <!-- <script type="text/javascript" src="./web3.min.latest.js"></script>-->
+    <script type="text/javascript" src="./coinFlipAbi.js"></script>
+    <script type="text/javascript" src="./main.js"></script>
+    <link rel="stylesheet" href="quartz-template-bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="">
+    <!--<div class="jumbotron jumbotron-fluid">-->
+    <div>
+      <div class="container">
+        <div class="row">
+        <h1 class="display-4 col-10">Coin Flipper</h1>
+        <button class="btn btn-primary col-2" type="button" id="login_button">Connect Wallet</button>
+        </div>
+        <p class="lead">pick right, you win!</p>
+      </div>
+    </div>
+    <div class="container border border-secondary rounded-3 mb-3">
+      <!--<div class="shadow p-3 mb-3 bg-white rounded-lg">-->
+      <div class="shadow p-3 mb-3 rounded-3">
+        <div class="row h5">
+          <div class="col col-sm">ADDRESS: <span id="user_address"></span></div>
+        </div>
+        <div class="row h5">
+          <div class="col-3 col-sm">TOTAL BETS: <span id="total_bets"></span></div>
+          <div class="col-3 col-sm">TOTAL WINS: <span id="total_wins"></span></div>
+          <div class="col-3 col-sm">LIFETIME WINNINGS: <span id="lifetime_winning"></span></div>
+        </div>
+        <div class="row h5">
+          <div class="col col-sm">
+            CURRENT BALANCE:&nbsp;<span id="player_balance"></span>
+            <button class="btn btn-primary" type="button" id="withdrawFunds_button">Withdraw Funds</button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="h3">Pool Balance: <span id="poolBalance_output"></span></div>
+        <div class="h2 mb-3">Enter Bet Amount - Max Amount: <span id="maxBetAmount_output"></span></div>
+        <!--<div class="d-flex justify-content-left my-4">
+          <span class="font-weight-bold mr-2 mt-1" style="color: green;">0.1</span>
+          <input type="range" class="custom_range w-75" min="0.1" max="10" step="0.1" id="betRange_input">
+          <span class="font-weight-bold ml-2 mt-1" style="color: red;">100</span>
+        </div>-->
+        <form class="form-inline">
+            <input type="number" class="form-control" id="betAmount_input" placeholder="Bet Amount" >
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <!--<label class="btn btn-outline-primary my-1 ml-3">
+                <input type="radio" name="optionCoinSide" value="0" id="coinSideHead_input">Head
+              </label>
+              <label class="btn btn-outline-primary my-1 mr-3">
+                <input type="radio" name="optionCoinSide" value="1" id="coinSideTail_input">Tail
+              </label>-->
+              <input type="radio" class="btn-check" name="optionCoinSide" value="0" id="coinSideHead_input" autocomplete="off">
+              <label class="btn btn-outline-primary" for="coinSideHead_input">HEAD</label>
+              <input type="radio" class="btn-check" name="optionCoinSide" value="1" id="coinSideTail_input" autocomplete="off">
+              <label class="btn btn-outline-primary" for="coinSideTail_input">TAIL</label>
+            </div>
+            <button type="button" id="flip_button" class="btn btn-primary ml-3">Flip Coin</button>
+        </form>
+      </div>
+      <!-- Wait Modal -->
+      <div class="modal fade" id="waitModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="waitModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="waitModalTitle">Waiting on Random Number...</h5>
+            </div>
+            <div class="modal-body">
+              <div class="d-flex justify-content-center">
+              <div id="wait-spinner" class="spinner-border text-primary" role="status">
+                <span class="sr-only"></span>
+              </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row text-center mt-5 text-uppercase h5">
+        <div class="col-sm">Result:&nbsp;<span id="sideShown_output"></span></div>
+        <div class="col-sm">Won/Lost:&nbsp;<span id="win_output"></span></div>
+        <div class="col-sm">Amount Won/Loss:&nbsp;<span id="amountWon_output"></span></div>
+      </div>
+      <div class="mt-5 mb-2">
+        <button type="button" id="fundContract_button" class="btn btn-primary ml-3">Fund Contract</button>
+        <button type="button" id="withdrawAll_button" class="btn btn-primary ml-3">Withdraw Pool Balance</button>
+      </div>  
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+  </body>
+</html>
